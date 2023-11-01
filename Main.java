@@ -47,16 +47,18 @@ public class Main {
     }
 
     public static void showGaraj(JFrame frame) {
+        garaj = Garaj.getInstance(); 
         frame.getContentPane().removeAll();
         frame.repaint();
+    
         JPanel garajPanel = new JPanel();
         garajPanel.setLayout(new BoxLayout(garajPanel, BoxLayout.Y_AXIS));
-
+    
         JLabel titleLabel = new JLabel("Mașinile din garaj:");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         garajPanel.add(titleLabel);
-
+    
         for (int i = 0; i < garaj.getNumarMasini(); i++) {
             Masina masina = garaj.selecteazaMasina(i);
             JButton carButton = createStyledButton(masina.getMarca() + " " + masina.getModel());
@@ -64,16 +66,16 @@ public class Main {
             carButton.addActionListener(e -> afiseazaDetaliiMasina(masina, frame));
             garajPanel.add(carButton);
         }
-
+    
         JButton backButton = createStyledButton("Inapoi");
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         backButton.addActionListener(e -> createAndShowGUI());
-
+    
         garajPanel.add(backButton);
         frame.add(garajPanel);
         frame.pack();
     }
-
+  
     public static void afiseazaDetaliiMasina(Masina masina, JFrame frame) {
         frame.getContentPane().removeAll();
         frame.repaint();

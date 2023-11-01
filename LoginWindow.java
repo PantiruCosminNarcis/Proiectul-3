@@ -7,8 +7,8 @@ public class LoginWindow extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
 
-    private static final String usernameDefault = "Administrator Garaj";
-    private static final String passwordDefault = "cateluscuparucret";
+    private static final String usernameDefault = "admin";
+    private static final String passwordDefault = "da";
 
     public LoginWindow() {
         setTitle("Autentificare");
