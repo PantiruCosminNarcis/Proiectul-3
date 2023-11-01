@@ -8,10 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            createAndShowGUI();
-            garaj = Garaj.getInstance();
+            new LoginWindow();  
         });
-    }
+        }
 
     public static void createAndShowGUI() {
         JFrame frame = new JFrame("Garaj Auto");
@@ -81,7 +80,7 @@ public class Main {
         JPanel detaliiPanel = new JPanel();
         detaliiPanel.setLayout(new BoxLayout(detaliiPanel, BoxLayout.Y_AXIS));
     
-        JLabel detaliiLabel = new JLabel("Ai selectat masina: " + masina.toString()); // Folosește toString()
+        JLabel detaliiLabel = new JLabel("Ai selectat masina: " + masina.toString()); 
         detaliiLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         detaliiLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         detaliiPanel.add(detaliiLabel);

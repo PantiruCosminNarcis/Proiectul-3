@@ -38,4 +38,3 @@ public class Masina {
         return marca+" "+model+" "+anFabricatie+" "+culoareMasina;
     }
     }
-
