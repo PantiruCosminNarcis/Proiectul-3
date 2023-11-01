@@ -1,9 +1,11 @@
+
 import java.util.ArrayList;
 import java.util.List;
 //Aceasta este clasa Garaj, in ea implementam toate masinile pe care le dorim
 public class Garaj {
     private List<Masina> masini = new ArrayList<>();
     private static final int size = 6;
+    private static Garaj instance;
 //Avem un constructor denumit 'Garaj'
     public Garaj() {
         
@@ -18,6 +20,12 @@ public class Garaj {
         masini.add(new Masina("Dacia", "Duster", 2022,4032,"Negru"));
         masini.add(new Masina("Ferrari", "LaFerrari", 2010,18540,"Rosu"));
     }
+    }
+    public static Garaj getInstance() {
+        if (instance == null) {
+            instance = new Garaj();
+        }
+        return instance;
     }
 //Metoda selecteazaMasina este pentru a ne returna masina dorita
     public Masina selecteazaMasina(int index) {

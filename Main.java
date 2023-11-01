@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     private static Garaj garaj;
@@ -11,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             createAndShowGUI();
-            garaj = new Garaj();
+            garaj = Garaj.getInstance();
         });
     }
 
@@ -19,80 +17,58 @@ public class Main {
         JFrame frame = new JFrame("Garaj Auto");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(800, 400));
-
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         JLabel titleLabel = new JLabel("Ce doriti să faceti?");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(titleLabel);
 
-        JButton openGarageButton = new JButton("Deschide Garajul");
+        JButton openGarageButton = createStyledButton("Deschide Garajul");
+        openGarageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(openGarageButton);
 
-        JButton addButton = new JButton("Adaugă Mașină");
+        JButton addButton = createStyledButton("Adaugă Mașină");
+        addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(addButton);
 
-        JButton exitButton = new JButton("Iesiti din program");
+        JButton exitButton = createStyledButton("Ieșiți din program");
+        exitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(exitButton);
 
         frame.add(mainPanel);
 
-        openGarageButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                frame.getContentPane().removeAll();
-                frame.repaint();
-                showGaraj(frame);
-            }
-        });
-
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.getContentPane().removeAll();
-                frame.repaint();
-                afiseazaFereastraAdaugareMasina(frame);
-            }
-        });
-
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        openGarageButton.addActionListener(e -> showGaraj(frame));
+        addButton.addActionListener(e -> afiseazaFereastraAdaugareMasina(frame));
+        exitButton.addActionListener(e -> System.exit(0));
 
         frame.pack();
         frame.setVisible(true);
     }
 
     public static void showGaraj(JFrame frame) {
+        frame.getContentPane().removeAll();
+        frame.repaint();
         JPanel garajPanel = new JPanel();
         garajPanel.setLayout(new BoxLayout(garajPanel, BoxLayout.Y_AXIS));
 
         JLabel titleLabel = new JLabel("Mașinile din garaj:");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         garajPanel.add(titleLabel);
 
         for (int i = 0; i < garaj.getNumarMasini(); i++) {
             Masina masina = garaj.selecteazaMasina(i);
-            JButton carButton = new JButton(masina.getMarca() + " " + masina.getModel());
-            carButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    afiseazaDetaliiMasina(masina, frame);
-                }
-            });
+            JButton carButton = createStyledButton(masina.getMarca() + " " + masina.getModel());
+            carButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+            carButton.addActionListener(e -> afiseazaDetaliiMasina(masina, frame));
             garajPanel.add(carButton);
         }
 
-        JButton backButton = new JButton("Inapoi");
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.getContentPane().removeAll();
-                frame.repaint();
-                createAndShowGUI();
-            }
-        });
+        JButton backButton = createStyledButton("Inapoi");
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backButton.addActionListener(e -> createAndShowGUI());
 
         garajPanel.add(backButton);
         frame.add(garajPanel);
@@ -100,33 +76,34 @@ public class Main {
     }
 
     public static void afiseazaDetaliiMasina(Masina masina, JFrame frame) {
+        frame.getContentPane().removeAll();
+        frame.repaint();
         JPanel detaliiPanel = new JPanel();
         detaliiPanel.setLayout(new BoxLayout(detaliiPanel, BoxLayout.Y_AXIS));
-
-        JLabel detaliiLabel = new JLabel("Ai selectat masina: " + masina.getMarca() + " " + masina.getModel() + ", An de fabricatie: " +
-                masina.getAnFabricatie() + " Numar de kilometrii " + masina.numarKilometrii() + " Culoarea: " + masina.culoareMasina() + ".");
+    
+        JLabel detaliiLabel = new JLabel("Ai selectat masina: " + masina.toString()); // Folosește toString()
+        detaliiLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        detaliiLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         detaliiPanel.add(detaliiLabel);
-
-        JButton backButton = new JButton("Inapoi");
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.getContentPane().removeAll();
-                frame.repaint();
-                showGaraj(frame);
-            }
-        });
-
+    
+        JButton backButton = createStyledButton("Inapoi");
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backButton.addActionListener(e -> showGaraj(frame));
+    
         detaliiPanel.add(backButton);
         frame.add(detaliiPanel);
         frame.pack();
     }
 
     public static void afiseazaFereastraAdaugareMasina(JFrame frame) {
+        frame.getContentPane().removeAll();
+        frame.repaint();
         JPanel addCarPanel = new JPanel();
         addCarPanel.setLayout(new BoxLayout(addCarPanel, BoxLayout.Y_AXIS));
 
         JLabel titleLabel = new JLabel("Introduceti datele pentru noua masina:");
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         addCarPanel.add(titleLabel);
 
         JTextField marcaField = new JTextField(20);
@@ -145,44 +122,46 @@ public class Main {
         addCarPanel.add(kmField);
         addCarPanel.add(new JLabel("Culoare:"));
         addCarPanel.add(culoareField);
-        
-        JButton addButton = new JButton("Adaugă Masină");
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String marca = marcaField.getText();
-                String model = modelField.getText();
-                int anFabricatie = Integer.parseInt(anFabricatieField.getText());
-                int km = Integer.parseInt(kmField.getText());
-                String culoare = culoareField.getText();
-                if(marcaField.getText().isEmpty()||modelField.getText().isEmpty()||anFabricatieField.getText().isEmpty()||kmField.getText().isEmpty()||culoareField.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Unul dintre campuri nu au fost completate!");
-                }
-                else
-                {
+
+        JButton addButton = createStyledButton("Adaugă Mașină");
+        addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        addButton.addActionListener(e -> {
+            String marca = marcaField.getText();
+            String model = modelField.getText();
+            int anFabricatie = Integer.parseInt(anFabricatieField.getText());
+            int km = Integer.parseInt(kmField.getText());
+            String culoare = culoareField.getText();
+            if (marcaField.getText().isEmpty() || modelField.getText().isEmpty() || anFabricatieField.getText().isEmpty() || kmField.getText().isEmpty() || culoareField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Unul dintre campuri nu a fost completat!");
+            } else {
                 Masina masina = new Masina(marca, model, anFabricatie, km, culoare);
                 garaj.adaugaMasina(masina);
                 frame.getContentPane().removeAll();
                 frame.repaint();
                 showGaraj(frame);
-                 JOptionPane.showMessageDialog(null,"Masina adaugata cu succes!");
+                JOptionPane.showMessageDialog(null, "Masina adaugata cu succes!");
             }
-        }
         });
 
-        JButton backButton = new JButton("Inapoi");
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.getContentPane().removeAll();
-                frame.repaint();
-                createAndShowGUI();
-            }
-        });
+        JButton backButton = createStyledButton("Inapoi");
+        backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        backButton.addActionListener(e -> createAndShowGUI());
 
         addCarPanel.add(addButton);
         addCarPanel.add(backButton);
         frame.add(addCarPanel);
         frame.pack();
+    }
+
+    public static JButton createStyledButton(String text) {
+        JButton button = new JButton(text);
+        button.setPreferredSize(new Dimension(200, 40));
+        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setForeground(Color.WHITE);
+        button.setBackground(Color.BLUE);
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        button.setVerticalAlignment(SwingConstants.CENTER);
+        button.setMargin(new Insets(10, 10, 10, 10));
+        return button;
     }
 }
