@@ -1,3 +1,5 @@
+package Garaj;
+
 import java.util.ArrayList;
 import java.util.List;
 //Aceasta este clasa Garaj, in ea implementam toate masinile pe care le dorim
@@ -15,9 +17,10 @@ public class Garaj {
         masini.add(new Masina("BMW", "M3", 2003,240000,"Albastru"));
         masini.add(new Masina("Toyota", "Supra", 1998,50321,"Gri Inchis"));
         masini.add(new Masina("Honda", "Civic", 2018,25432,"Negru"));
-        masini.add(new Masina("Volkswagen", "Passat", 2023,600,"Maro"));
-        masini.add(new Masina("Dacia", "Duster", 2022,4032,"Negru"));
         masini.add(new Masina("Ferrari", "LaFerrari", 2010,18540,"Rosu"));
+        masini.add(new Masina("Dodge", "Charger", 1970,20040,"Negru"));
+        MasinaElectrica masinaElectrica=new MasinaElectrica("Tesla", "3", 2022, 43000, "Alb", 400);
+        masini.add(masinaElectrica);
     }
     }
     public static Garaj getInstance() {
@@ -26,7 +29,7 @@ public class Garaj {
         }
         return instance;
     }
-//Metoda selecteaza Masina este pentru a ne returna masina dorita
+//Metoda selecteazaMasina este pentru a ne returna masina dorita
     public Masina selecteazaMasina(int index) {
         if (index >= 0 && index < masini.size()) {
             return masini.get(index);
@@ -48,5 +51,8 @@ public class Garaj {
     public void adaugaMasina(Masina masina) {
         masini.add(masina);
        
+    }
+    public void stergeMasina(Masina masina) {
+        masini.remove(masina);
     }
 }

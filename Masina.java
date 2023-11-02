@@ -1,3 +1,5 @@
+package Garaj;
+
 public class Masina {
     private String marca;
     private String model;
@@ -38,3 +40,4 @@ public class Masina {
         return marca+" "+model+" "+anFabricatie+" "+culoareMasina;
     }
     }
+

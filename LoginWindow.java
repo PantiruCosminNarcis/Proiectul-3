@@ -1,17 +1,21 @@
+package Garaj;
+
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 public class LoginWindow extends JFrame {
     private JTextField usernameField;
     private JPasswordField passwordField;
 
-    private static final String usernameDefault = "admin";
-    private static final String passwordDefault = "da";
 
+    private static final String usernameDefault = "Admin";
+    private static final String passwordDefault = "da";
     public LoginWindow() {
-        setTitle("Autentificare");
+        super("Autentificare");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(new Dimension(400, 200));
         setLocationRelativeTo(null);  
@@ -21,7 +25,7 @@ public class LoginWindow extends JFrame {
 
         JLabel titleLabel = new JLabel("Vă rugăm să vă autentificați:");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         loginPanel.add(titleLabel);
 
         JLabel usernameLabel = new JLabel("Nume de utilizator:");

@@ -1,8 +1,7 @@
+package Garaj;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import java.awt.*;
 public class Main {
     private static Garaj garaj;
 
@@ -10,7 +9,7 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             new LoginWindow();  
         });
-        }
+    }
 
     public static void createAndShowGUI() {
         JFrame frame = new JFrame("Garaj Auto");
@@ -50,15 +49,20 @@ public class Main {
         garaj = Garaj.getInstance(); 
         frame.getContentPane().removeAll();
         frame.repaint();
-    
+         
         JPanel garajPanel = new JPanel();
         garajPanel.setLayout(new BoxLayout(garajPanel, BoxLayout.Y_AXIS));
-    
+        if(garaj.getNumarMasini()==0){
+            JLabel emptyGarageLabel = new JLabel("Garajul este gol.");
+        emptyGarageLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        emptyGarageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        garajPanel.add(emptyGarageLabel);
+        }
+        else{
         JLabel titleLabel = new JLabel("Mașinile din garaj:");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         garajPanel.add(titleLabel);
-    
         for (int i = 0; i < garaj.getNumarMasini(); i++) {
             Masina masina = garaj.selecteazaMasina(i);
             JButton carButton = createStyledButton(masina.getMarca() + " " + masina.getModel());
@@ -66,34 +70,50 @@ public class Main {
             carButton.addActionListener(e -> afiseazaDetaliiMasina(masina, frame));
             garajPanel.add(carButton);
         }
-    
+    }
+
         JButton backButton = createStyledButton("Inapoi");
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         backButton.addActionListener(e -> createAndShowGUI());
-    
+
         garajPanel.add(backButton);
         frame.add(garajPanel);
         frame.pack();
     }
-  
+
     public static void afiseazaDetaliiMasina(Masina masina, JFrame frame) {
         frame.getContentPane().removeAll();
         frame.repaint();
         JPanel detaliiPanel = new JPanel();
         detaliiPanel.setLayout(new BoxLayout(detaliiPanel, BoxLayout.Y_AXIS));
-    
+
         JLabel detaliiLabel = new JLabel("Ai selectat masina: " + masina.toString()); 
         detaliiLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         detaliiLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         detaliiPanel.add(detaliiLabel);
-    
+
         JButton backButton = createStyledButton("Inapoi");
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         backButton.addActionListener(e -> showGaraj(frame));
-    
+
+        JButton leaveGarageButton = createStyledButton("Părăsește Garajul");
+        leaveGarageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        leaveGarageButton.addActionListener(e -> {
+            int option = JOptionPane.showConfirmDialog(frame, "Esti sigur ca doresti sa parasesti garajul cu aceasta masina?","Confirmare",JOptionPane.YES_NO_OPTION);
+            if(option==JOptionPane.YES_OPTION) {
+            paraseazaGarajul(masina, frame);
+            }
+        });
         detaliiPanel.add(backButton);
+        detaliiPanel.add(leaveGarageButton);
         frame.add(detaliiPanel);
         frame.pack();
+    }
+
+    public static void paraseazaGarajul(Masina masina, JFrame frame) {
+        garaj.stergeMasina(masina);
+        JOptionPane.showMessageDialog(frame, "Vehiculul a fost scos cu succes din garaj");
+        showGaraj(frame);
     }
 
     public static void afiseazaFereastraAdaugareMasina(JFrame frame) {
@@ -140,7 +160,7 @@ public class Main {
                 frame.getContentPane().removeAll();
                 frame.repaint();
                 showGaraj(frame);
-                JOptionPane.showMessageDialog(null, "Masina adaugata cu succes!");
+                JOptionPane.showMessageDialog(frame, "Masina adaugata cu succes!");
             }
         });
 
