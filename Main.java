@@ -46,7 +46,9 @@ public class Main {
     }
 
     public static void showGaraj(JFrame frame) {
-        garaj = Garaj.getInstance(); 
+        if(garaj==null){
+        garaj = Garaj.getInstance();
+        }
         frame.getContentPane().removeAll();
         frame.repaint();
          

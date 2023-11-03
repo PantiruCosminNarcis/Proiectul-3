@@ -34,7 +34,9 @@ public class Masina {
     public String culoareMasina() {
         return culoareMasina;
     }
-
+    public void setCuloareMasina(String culoareMasina) {
+        this.culoareMasina = culoareMasina;
+    }
     @Override
     public String toString() {
         return marca+" "+model+" "+anFabricatie+" "+culoareMasina;

@@ -19,7 +19,7 @@ public class Garaj {
         masini.add(new Masina("Honda", "Civic", 2018,25432,"Negru"));
         masini.add(new Masina("Ferrari", "LaFerrari", 2010,18540,"Rosu"));
         masini.add(new Masina("Dodge", "Charger", 1970,20040,"Negru"));
-        MasinaElectrica masinaElectrica=new MasinaElectrica("Tesla", "3", 2022, 43000, "Alb", 400);
+        MasinaElectrica masinaElectrica=new MasinaElectrica("Tesla", "3", 2022, 43000, " Alb ", 400);
         masini.add(masinaElectrica);
     }
     }
