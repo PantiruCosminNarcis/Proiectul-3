@@ -17,7 +17,7 @@ public class LoginWindow extends JFrame {
     public LoginWindow() {
         super("Autentificare");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(new Dimension(400, 200));
+        setSize(new Dimension(400, 200)); 
         setLocationRelativeTo(null);  
 
         JPanel loginPanel = new JPanel();

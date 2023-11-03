@@ -26,6 +26,7 @@ public class Main {
         JButton openGarageButton = createStyledButton("Deschide Garajul");
         openGarageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPanel.add(openGarageButton);
+                    Logging.getInstance().log("Pornit");
 
         JButton addButton = createStyledButton("Adaugă Mașină");
         addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -100,6 +101,7 @@ public class Main {
 
         JButton leaveGarageButton = createStyledButton("Părăsește Garajul");
         leaveGarageButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        //Fereasta modala
         leaveGarageButton.addActionListener(e -> {
             int option = JOptionPane.showConfirmDialog(frame, "Esti sigur ca doresti sa parasesti garajul cu aceasta masina?","Confirmare",JOptionPane.YES_NO_OPTION);
             if(option==JOptionPane.YES_OPTION) {
