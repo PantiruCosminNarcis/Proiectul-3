@@ -1,0 +1,78 @@
+# Proiectul-3
+Proiectul este despre un garaj auto si origanizarea acestuia
+Incepem cu ideea principala a acestui cod, este de a adauga si de a iesi cu masina dorita din propriul garaj.
+
+Clasa 'Garaj'
+Garaj.java este o clasa responsabila de gestionarea garajului si a masinilor din aceasta. Aici este implementat singleton ul care asigura o singura instanta a garajului
+
+Atribute:
+'masini' este o lista de obiecta pentru a tine evidenta masinilor din garaj gata implementate
+'size' este o constanta care defineste capacitatea maxima admisa in garaj, aceea fiind de 8 masini
+'instance' o referinta la instanta actuala a clasei 'garaj', utilizata pentru singleton
+
+Metode:
+Garaj() Constructorul principal al clasei noastre, ea initializeaza lista de masini prestabilite in garaj
+getInstance() Metoda statica folosita pentru singleton
+selecteazaMasina() Returneaza masina de la un anumit index
+afiseazaMasini() Afiseaza lista de masini din garaj
+adaugaMasina() Adauga o masina in garaj
+stergeMasina() Elimina o masina din garaj
+
+Clasa 'Main'
+'Main' este clasa principala care contine metoda 'main' ce gestioneaza interfata garajului
+Atribute:
+'garaj' o referinta la instanta 'garaj', ultilizata pentru a gestiona garajul nostru
+Metode:
+main(String[] args): Metoda main care lansează aplicația, inițializând fereastra principală.
+createAndShowGUI(): Inițializează și afișează fereastra principală a aplicației.
+showGaraj(JFrame frame): Afisează lista mașinilor din garaj sau un mesaj dacă garajul este gol.
+afiseazaDetaliiMasina(Masina masina, JFrame frame): Afișează detalii despre o anumită mașină din garaj.
+paraseazaGarajul(Masina masina, JFrame frame): Elimină o mașină din garaj.
+afiseazaFereastraAdaugareMasina(JFrame frame): Afișează fereastra pentru adăugarea unei ni mașini.
+createStyledButton(String text): Creează un buton stilizat pentru interfața grafică.
+
+Clasa 'Masina'
+'Masina.java' este clasa de baza ce reprezinta o masina in garaj
+Atribute:
+marca: marca mașinii.
+model: modelul mașinii.
+anFabricatie: anul de fabricație al mașinii.
+numarKilometrii: numărul de kilometri parcurși de mașină.
+culoareMasina: culoarea mașinii.
+
+Metode:
+Masina(marca, model, anFabricatie, numarKilometrii, culoareMasina): Constructorul care inițializează toate atributele mașinii.
+getModel(): Returnează modelul mașinii.
+getMarca(): Returnează marca mașinii.
+getAnFabricatie(): Returnează anul de fabricație al mașinii.
+getNumarKilometrii(): Returnează numărul de kilometri parcurși de mașină.
+getCuloareMasina(): Returnează culoarea mașinii.
+setCuloareMasina(culoareMasina): Setează culoarea mașinii.
+toString(): Returnează o reprezentare text a mașinii, care include marca, model, anul de fabricație și culoarea.
+
+Clasa 'MasinaElectrica'
+Reprezinta mostenirea clasei 'Masina', este utilizata doar pentru masinile electrice 
+
+Atribute:
+'autonomie': Reprezinta autonomia bateriei masini electrice --> numarul de km care ii poate parcurge
+In subclasa 'MasinaElectrica' este prezentata suprascrierea metodelor(polimorfism) si utilizarea metodei super
+
+Metode:
+MasinaElectrica(marca, model, anFabricatie, numarKilometrii, culoareMasina, autonomie): Constructorul care inițializează toate atributele, inclusiv autonomia.
+getAutonomie(): Returnează autonomia mașinii electrice.
+toString(): Suprascrie metoda toString pentru a include și informații despre autonomie.
+
+Clasa 'LoginWindow'
+LoginWindow este o fereastră de autentificare care solicită un nume de utilizator și o parolă pentru a autentifica administratorul în aplicație. Această fereastră este afișată 
+la pornirea aplicației și trebuie să fie completată corect pentru a accesa restul funcționalităților aplicației.
+
+Atribute:
+usernameField: Un câmp de text în care utilizatorul introduce numele de utilizator.
+passwordField: Un câmp de text pentru introducerea parolei.
+usernameDefault: Valoarea implicită a numelui de utilizator (setată la "Admin").
+passwordDefault: Valoarea implicită a parolei (setată la "da").
+
+Metode:
+LoginWindow(): Constructorul clasei care inițializează fereastra de autentificare și elementele asociate acesteia.
+autentificareCorecta(String username, String password): Verifică dacă numele de utilizator și parola introduse corespund valorilor implicite.
+main(String[] args): Metoda principală care lansează fereastra de autentificare.
